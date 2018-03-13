@@ -1,6 +1,7 @@
 'use strict';
 
 const Hapi = require('hapi');
+const Path = require('path');
 
 const server = Hapi.server({
     port: 4000,
@@ -8,7 +9,16 @@ const server = Hapi.server({
 });
 
 const init = async () => {
-
+  await server.register(require('inert'));
+  server.route({
+    method: 'GET',
+    path: '/{param*}',
+    handler: {
+        directory: {
+            path: './client/build'
+        }
+    }
+});
     await server.start();
     console.log(`Server running at: ${server.info.uri}`);
 };
@@ -18,6 +28,7 @@ process.on('unhandledRejection', (err) => {
     console.log(err);
     process.exit(1);
 });
+
 
 
 // the songs and pictures  stored in firebase cloud storage , the urls are hardcoded
@@ -77,4 +88,7 @@ server.route({
           };
     }
 });
+
+
+
 init();
