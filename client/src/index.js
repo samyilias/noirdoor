@@ -1,8 +1,44 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Layout from './Layout';
-import registerServiceWorker from './registerServiceWorker';
+import ArtistPage from './ArtistPage';
+import Home from './Home';
 
-ReactDOM.render(<Layout />, document.getElementById('root'));
+import registerServiceWorker from './registerServiceWorker';
+import {BrowserRouter as Router , Route,Switch} from "react-router-dom";
+
+export default class App extends React.Component{
+    render(){
+        return(
+            <div>
+                <Router>
+                    <Switch>
+                     <Route
+                     path="/"
+                     exact
+                     component={Home}
+                     />   
+                    <Route 
+                     exact
+                     path="/:id" 
+                     render={(props)=>{
+                       return <ArtistPage  {...props}/> 
+                    }}
+                    />
+                     
+                     <Route
+                        render={(props)=>{
+                            return <h1>not found</h1> 
+                        }}
+                    />
+
+                    </Switch>
+                    </Router>
+             </div>   
+        )
+    }
+}
+
+
+ReactDOM.render(<App/>, document.getElementById('root'));
 registerServiceWorker();

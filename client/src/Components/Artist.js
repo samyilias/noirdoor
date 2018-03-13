@@ -29,7 +29,7 @@ const Button= styled.button`
     margin: 5px;
 `
 const Artist = (props)=>{
-    const {firstName,lastName,bio } = props.johnData;
+    const {firstName,lastName,bio } = props.artist;
     const{play}=props;
     return(
         <div>

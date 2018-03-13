@@ -110,7 +110,6 @@ export default class Player extends React.Component {
   };
 
   render() {
-    console.log(this.state.currentTime/60)
     return (
     <div>
       <audio src={this.props.audio}

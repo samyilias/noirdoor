@@ -6,14 +6,14 @@ import Player from "./Components/Player";
 import Songs from "./Components/Songs";
 
 
-class Layout extends Component {
+class ArtistPage extends Component {
   constructor(){
     super();
     this.state={
       songPLaying: "",
       play: false,
 
-      artistJohn: {},
+      artist: {},
       imgs:{},
       songs: [
         {
@@ -30,13 +30,15 @@ class Layout extends Component {
     }
   }
   componentWillMount(){
-    axios.get('/users/john')
+    console.log(this.props)
+    const artist= this.props.match.params.id;
+    axios.get(`users/${artist}`)
     .then((response)=> {
       this.setState({
-        artistJohn: response.data,
+        artist: response.data,
         imgs: response.data.imgs,
-        songs: response.data.johnSongs,
-        songPLaying: response.data.johnSongs[0].url
+        songs: response.data.songs,
+        songPLaying: response.data.songs[0].url
       })
     })
     .catch(function (error) {
@@ -66,7 +68,7 @@ class Layout extends Component {
         margin: "0 auto"
       }}>
         <Header/> 
-        <Artist johnData={this.state.artistJohn} imgs={this.state.imgs} songs={this.state.songs} changeSong={this.changeSong.bind(this)} play={this.state.play} togglePlay={this.togglePlay.bind(this)}/>  
+        <Artist  artist={this.state.artist} imgs={this.state.imgs} songs={this.state.songs} changeSong={this.changeSong.bind(this)} play={this.state.play} togglePlay={this.togglePlay.bind(this)}/>  
         <Songs songPLaying={this.state.songPLaying} songs={this.state.songs} changeSong={this.changeSong.bind(this)}/>
         <div style={{
           position: "fixed",
@@ -86,4 +88,4 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+export default ArtistPage;
