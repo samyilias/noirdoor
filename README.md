@@ -5,5 +5,3 @@ I did use firebase to host my images and audio files , but unfortunatly I was no
 
 ## start the server
     cd noirdoor/ nodemon
-## start the client 
-    cd client / yarn start
