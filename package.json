@@ -4,11 +4,14 @@
   "description": "just a small hapi server for noirdoor",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "heroku-postbuild": "cd client && yarn --production=false && yarn run build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "hapi": "^17.2.2"
   }
+  
 }
