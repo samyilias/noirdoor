@@ -113,6 +113,17 @@ hoek@5.x.x:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-5.0.3.tgz#b71d40d943d0a95da01956b547f83c4a5b4a34ac"
 
+inert@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/inert/-/inert-5.1.0.tgz#e9f130dc3047ccd9ffaa64b157b4c1114611035d"
+  dependencies:
+    ammo "3.x.x"
+    boom "7.x.x"
+    bounce "1.x.x"
+    hoek "5.x.x"
+    joi "13.x.x"
+    lru-cache "4.1.x"
+
 iron@5.x.x:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/iron/-/iron-5.0.4.tgz#003ed822f656f07c2b62762815f5de3947326867"
@@ -134,6 +145,13 @@ joi@13.x.x:
     hoek "5.x.x"
     isemail "3.x.x"
     topo "3.x.x"
+
+lru-cache@4.1.x:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.2.tgz#45234b2e6e2f2b33da125624c4664929a0224c3f"
+  dependencies:
+    pseudomap "^1.0.2"
+    yallist "^2.1.2"
 
 mime-db@1.x.x:
   version "1.33.0"
@@ -169,6 +187,10 @@ podium@3.x.x:
   dependencies:
     hoek "5.x.x"
     joi "13.x.x"
+
+pseudomap@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
 punycode@2.x.x:
   version "2.1.0"
@@ -224,3 +246,7 @@ wreck@14.x.x:
   dependencies:
     boom "7.x.x"
     hoek "5.x.x"
+
+yallist@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
