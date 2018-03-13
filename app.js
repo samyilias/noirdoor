@@ -1,49 +1,49 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+'use strict';
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+const Hapi = require('hapi');
 
-var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hjs');
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', index);
-app.use('/users', users);
-
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+const server = Hapi.server({
+    port: 4000,
+    host: 'localhost'
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+const init = async () => {
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    await server.start();
+    console.log(`Server running at: ${server.info.uri}`);
+};
+
+process.on('unhandledRejection', (err) => {
+
+    console.log(err);
+    process.exit(1);
 });
+var johnSongs = [
+    {
+      url:"https://firebasestorage.googleapis.com/v0/b/noirdoor-7d63d.appspot.com/o/artists%2Fjohn%2FEminem.ogg?alt=media&token=a70e963b-9072-4b72-a409-7cc5082a77b0",
+      title: "Loose yourself"
+    },
+    {
+      url: "https://firebasestorage.googleapis.com/v0/b/noirdoor-7d63d.appspot.com/o/artists%2Fjohn%2Fdre.ogg?alt=media&token=67c52050-c349-4ec7-bf28-8f1a47553128",
+      title: "Still"
+  
+    }
+  ]
+server.route({
+    method: 'GET',
+    path: '/users/john',
+    handler: (request, h) => {
 
-
-
-module.exports = app;
+        return {
+            firstName:"John",
+            lastName:"Doe",
+            bio: "Un artiste est un individu faisant œuvre, cultivant ou maîtrisant un art, un savoir, une technique, et dont on remarque entre autres la créativité, la poésie, l'originalité de sa production, de ses actes, de ses gestes.",
+            imgs:{
+              profile:"https://firebasestorage.googleapis.com/v0/b/noirdoor-7d63d.appspot.com/o/artists%2Fjohn%2Fme.png?alt=media&token=d03bc167-3fed-44fd-9714-39c1f9227348",
+              wallpaper:"https://firebasestorage.googleapis.com/v0/b/noirdoor-7d63d.appspot.com/o/artists%2Fjohn%2Fjohn-wallpaper.jpg?alt=media&token=92569a63-18a0-48a7-8a1a-26e7d693a62f"
+            },
+            johnSongs
+          };
+    }
+});
+init();

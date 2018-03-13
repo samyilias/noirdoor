@@ -22,12 +22,16 @@ const Timeline = styled.div`
     background: rgba(0,0,0,.3);
 
 `
+const Icon = styled.div`
+    cursor: pointer;
+    color: #605e5e;
+`
 export default class Player extends React.Component {
 
   constructor(props) {
     super(props);
+  
     this.state = { 
-      play: false ,
       duration: null,
       currentTime: null
     };
@@ -41,12 +45,16 @@ export default class Player extends React.Component {
   };
 
   componentDidMount() {
+    
+
     this.audio.addEventListener("timeupdate", () => {
       let ratio = this.audio.currentTime / this.audio.duration;
       let position = (this.timeline.offsetWidth * ratio) + this.timeline.offsetLeft;
       this.positionHandle(position);
-      let duration = (this.audio.duration/60).toPrecision(3);
-      let currentTime = (this.audio.currentTime/60).toPrecision(3);
+      let duration = Math.floor(this.audio.duration);
+      let currentTime = Math.floor(this.audio.currentTime);
+
+      
 
       this.setState({
         duration: duration,
@@ -74,7 +82,7 @@ export default class Player extends React.Component {
     this.positionHandle(e.pageX);
     this.audio.currentTime = ((e.pageX - this.timeline.offsetLeft) / this.timeline.offsetWidth) * this.audio.duration;
     this.setState({
-      currentTime: ((e.pageX - this.timeline.offsetLeft) / this.timeline.offsetWidth) * this.audio.duration
+      currentTime:  this.audio.duration
 
     })
     
@@ -97,28 +105,29 @@ export default class Player extends React.Component {
     } else {
       this.setState({ play: true });
       this.audio.play();
-      console.log(this.audio.currentTime)
       
 
     }
   };
 
   render() {
+    console.log(this.state.currentTime/60)
     return (
     <div>
       <audio src={this.props.audio}
         ref={(audio) => { this.audio = audio }}
-        autoPlay
-
+        autoPlay={this.props.play}
+        type="audio/ogg"
       />
       <Wrapper>
-      <div><span>{this.state.currentTime}</span></div>
-      <div 
-      onClick={this.play} 
-      className="material-icons" >
-      {!this.state.play ? "play_arrow" : "pause"}
-      </div>
-      <div><span>{this.state.duration}</span></div>
+      <div><span>{Math.floor(this.state.currentTime/60)}:{Math.floor(this.state.currentTime%60)}</span></div>
+      <Icon
+        onClick={this.props.togglePlay} 
+        className="material-icons" 
+      >
+      {!this.props.play ? "play_arrow" : "pause"}
+      </Icon>
+      <div><span>{Math.floor(this.state.duration/60)|| "0"} : {Math.floor(this.state.duration%60)|| "0"}</span></div>
       
       </Wrapper>
       <Timeline  onClick={this.mouseMove} innerRef={(timeline) => { this.timeline = timeline }}>

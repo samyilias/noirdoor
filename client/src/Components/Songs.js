@@ -4,12 +4,12 @@ import styled from "styled-components";
 const Wrapper = styled.div`
     min-height: 60vh;
     background: #605e5e;
+    overflow-y: scroll
   
 `
 const Title = styled.h1`
     margin: 0px;
     color: white;
-
 `
 const SongItem = styled.li`
     list-style:none;
@@ -19,11 +19,6 @@ const SongItem = styled.li`
     margin: 5px;
     cursor: pointer;
     border-bottom: 1px solid lightgrey;
-    
-
-    
-
-
 `
 const SongWrapper = styled.ul`
     margin: 0px;
@@ -31,14 +26,8 @@ const SongWrapper = styled.ul`
 `
 
 class Songs extends Component {
-  
-    
-  
   render() {
     const {songs,changeSong,songPLaying }=this.props;
-    console.log(this.props)
-
-    console.log(songs)
     const songsMaped = songs.map((item,index)=>{
         return <SongItem active={songPLaying === item.url} key={index} onClick={()=>changeSong(item.url)}>{item.title}</SongItem>
     })
@@ -51,8 +40,6 @@ class Songs extends Component {
         <SongWrapper>
         {songsMaped}
         </SongWrapper>
-
-        
       </Wrapper>
     );
   }

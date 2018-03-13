@@ -30,13 +30,13 @@ const Button= styled.button`
 `
 const Artist = (props)=>{
     const {firstName,lastName,bio } = props.johnData;
+    const{play}=props;
     return(
         <div>
         <ArtistContainer>
             <WallPaper src={props.imgs.wallpaper}>
                 <ArtistName>{firstName} {lastName}</ArtistName>
-                 <Button primary>PLAY</Button>
-                 <Button>FOLLOW</Button>
+                 <Button primary onClick={props.togglePlay}>{!play?"PLAY":"PAUSE"}</Button>
 
             </WallPaper>
 
