@@ -4,4 +4,5 @@
 ### packagaes Iam using 
 * axios for data fetching
 * styled components for styling in react 
+* yarn package manager 
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import './Player.css';
 import styled from "styled-components";
 
 

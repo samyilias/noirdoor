@@ -18,6 +18,9 @@ process.on('unhandledRejection', (err) => {
     console.log(err);
     process.exit(1);
 });
+
+
+// the songs and pictures  stored in firebase cloud storage , the urls are hardcoded
 var johnSongs = [
     {
       url:"https://firebasestorage.googleapis.com/v0/b/noirdoor-7d63d.appspot.com/o/artists%2Fjohn%2FEminem.ogg?alt=media&token=a70e963b-9072-4b72-a409-7cc5082a77b0",
