@@ -19,7 +19,7 @@ export default class App extends React.Component{
                      component={Home}
                      />   
                     <Route 
-                     exact
+                     
                      path="/:id" 
                      render={(props)=>{
                        return <ArtistPage  {...props}/> 

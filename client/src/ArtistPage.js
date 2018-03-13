@@ -30,7 +30,10 @@ class ArtistPage extends Component {
     }
   }
   componentWillMount(){
-    console.log(this.props)
+    this.fetchData();
+   
+  }
+  fetchData(){
     const artist= this.props.match.params.id;
     axios.get(`users/${artist}`)
     .then((response)=> {
@@ -39,6 +42,23 @@ class ArtistPage extends Component {
         imgs: response.data.imgs,
         songs: response.data.songs,
         songPLaying: response.data.songs[0].url
+      })
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  }
+  componentDidUpdate(){
+    const artist= this.props.match.params.id;
+
+    axios.get(`users/${artist}`)
+    .then((response)=> {
+      this.setState({
+        artist: response.data,
+        imgs: response.data.imgs,
+        songs: response.data.songs,
+        
       })
     })
     .catch(function (error) {
@@ -69,7 +89,7 @@ class ArtistPage extends Component {
       }}>
         <Header/> 
         <Artist  artist={this.state.artist} imgs={this.state.imgs} songs={this.state.songs} changeSong={this.changeSong.bind(this)} play={this.state.play} togglePlay={this.togglePlay.bind(this)}/>  
-        <Songs songPLaying={this.state.songPLaying} songs={this.state.songs} changeSong={this.changeSong.bind(this)}/>
+        <Songs songPLaying={this.state.songPLaying} songs={this.state.songs} changeSong={this.changeSong.bind(this)} activeArtist={this.props.match.params.id}/>
         <div style={{
           position: "fixed",
           padding:"8px",
@@ -81,6 +101,8 @@ class ArtistPage extends Component {
           background: "white",
           transform: "translate(-50%)"
         }}>
+       
+        
         <Player ref={(node) => { this.child = node; }} audio={this.state.songPLaying} play={this.state.play} togglePlay={this.togglePlay.bind(this)}/>
         </div>
       </div>

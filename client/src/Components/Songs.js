@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
+import OtherArtist from './OtherArtist';
 
 const Wrapper = styled.div`
-    min-height: 60vh;
+    min-height: 80vh;
     background: #605e5e;
-    overflow-y: scroll
+    overflow-y: auto;
   
 `
 const Title = styled.h1`
@@ -40,6 +41,7 @@ class Songs extends Component {
         <SongWrapper>
         {songsMaped}
         </SongWrapper>
+        <OtherArtist activeArtist={this.props.activeArtist}/>
       </Wrapper>
     );
   }
